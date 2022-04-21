@@ -1,0 +1,16 @@
+p {
+    background-color: rgb(239, 149, 213);
+    font-family: Verdana, sans-serif;
+}
+#secondo{
+    color: rgba(66, 66, 227, 0.851);
+    font-size: 36px;
+}
+#terzo {
+    font-size: 24px;
+}
+#quarto {
+    font-size: 24px;
+    background-color: rgb(157, 237, 157);
+    font-weight: 700;
+}
