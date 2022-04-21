@@ -1,16 +1,19 @@
-p {
-    background-color: rgb(239, 149, 213);
-    font-family: Verdana, sans-serif;
-}
-#secondo{
-    color: rgba(66, 66, 227, 0.851);
+.odd {
+    background-color: rgb(255, 167, 167);
+    font-family: Verdana, "DejaVu Sans", sans-serif;
+  }
+  
+  .oddly-cool {
+    font-size: 24px;
+  }
+  
+  #two {
+    color: #0000ff;
     font-size: 36px;
-}
-#terzo {
+  }
+  
+  #four {
+    background-color: hsl(120, 100%, 75%);
     font-size: 24px;
-}
-#quarto {
-    font-size: 24px;
-    background-color: rgb(157, 237, 157);
-    font-weight: 700;
-}
+    font-weight: bold;
+  }
