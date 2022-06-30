@@ -1,0 +1,69 @@
+/*
+### Self Check
+- The gap is 15px
+- The grid has two columns
+- The grid has four rows
+- The grid tracks do not use static sizes (no pixels!)
+- The second column is three times larger than the other
+- The third row is five times larger than the others
+- The rows and columns stretch wider when making the browser window bigger
+- The rows and columns stretch taller when making the browser window smaller
+*/
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  height: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  
+  /*solution*/
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr 5fr 1fr;
+  gap: 15px;
+}
+
+.container div {
+  padding: 15px;
+  font-size: 32px;
+  font-family: Helvetica;
+  font-weight: bold;
+  color: white;
+  border-radius: 15px;
+}
+
+.header {
+  background-color: #FFDE22;
+  grid-column: 1 / 3;
+}
+
+.sidebar {
+  background-color: #FF7755;
+  grid-row: 2 / 4;
+}
+
+.nav {
+  background-color: #00DDFF;
+}
+
+.article {
+  background-color: #bccbde;
+}
+
+.article p {
+  font-size: 18px;
+  font-family: sans-serif;
+  color: white;
+  text-align: left;
+}
+
+.footer {
+  background-color: #393f4d;
+  grid-column: 1 / 3;
+}
