@@ -8,6 +8,16 @@
     <title>Canvas Resize</title>
     <script src="canvas.js" defer></script>
     <style type="text/css">
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
         canvas {
             border: 1px solid black;
         }

@@ -4,6 +4,7 @@ canvas.height = window.innerHeight;
 
 let c = canvas.getContext("2d");
 
+/*
 c.fillStyle = "blue";
 c.fillRect(50, 100, 100, 100);
 c.fillStyle = "green";
@@ -43,3 +44,28 @@ c.beginPath();
 c.arc(300, 300, 50, 22, 90, true);
 c.stroke();
 */
+
+let x = Math.random() * innerWidth;
+let y = Math.random() * innerHeight;
+let dx = (Math.random() + 0.5) * 7;
+let dy = (Math.random() + 0.5) * 7;
+let radius = 50;
+c.strokeStyle = "black";
+function animate() {
+  requestAnimationFrame(animate);
+  c.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  c.beginPath();
+  c.arc(x, y, radius, 0, Math.PI * 2, false);
+  c.stroke();
+  if (x + radius > innerWidth || x - radius < 0) {
+    dx = -dx;
+  }
+  if (y + radius > innerHeight || y - radius < 0) {
+    dy = -dy;
+  }
+  x += dx;
+  y += dy;
+}
+
+animate();
