@@ -88,6 +88,7 @@ class Circle {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
+    c.stroke();
   }
   updatePos() {
     if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
@@ -125,7 +126,7 @@ function getCircle() {
 }
 
 let cirles = [];
-const NCIRCS = 200;
+const NCIRCS = 100;
 
 for (let i = 0; i < NCIRCS; i++) {
   cirles.push(getCircle());
