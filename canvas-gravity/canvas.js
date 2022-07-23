@@ -1,158 +1,86 @@
-let canvas = document.querySelector("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let c = canvas.getContext("2d");
-
-/*
-c.fillStyle = "blue";
-c.fillRect(50, 100, 100, 100);
-c.fillStyle = "green";
-c.fillRect(100, 400, 100, 100);
-c.fillStyle = "lightgrey";
-c.fillRect(300, 400, 50, 50);
-
-//line
-c.beginPath();
-c.moveTo(50, 300);
-c.lineTo(300, 100);
-c.lineTo(400, 300);
-c.strokeStyle = "red";
-c.stroke();
-
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+function randomIntFromRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-//arc / circ
-for (let i = 0; i < 6; i++) {
-  c.strokeStyle = getRandomColor();
-  let x = Math.random() * window.innerWidth;
-  let y = Math.random() * window.innerHeight;
-  c.beginPath();
-  c.arc(x, y, 50, 0, 360, false);
-  c.stroke();
+function randomColor(colors) {
+  return colors[Math.floor(Math.random() * colors.length)];
 }
-/*
-c.strokeStyle = "black";
-c.beginPath();
-c.arc(300, 300, 50, 22, 90, true);
-c.stroke();
-*/
-let mouse = {
-  x: undefined,
-  y: undefined,
+
+function distance(x1, y1, x2, y2) {
+  const xDist = x2 - x1;
+  const yDist = y2 - y1;
+
+  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+}
+
+const canvas = document.querySelector("canvas");
+const c = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+const mouse = {
+  x: innerWidth / 2,
+  y: innerHeight / 2,
 };
 
-let maxRadius = 100;
-let distance = 50;
+const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
 
-function getRandomColor() {
-  var letters = "0123456789ABCDEF";
-  var color = "#";
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-window.addEventListener("mousemove", function (event) {
-  mouse.x = event.x;
-  mouse.y = event.y;
+// Event Listeners
+addEventListener("mousemove", (event) => {
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
 });
 
-window.addEventListener("resize", function (event) {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
   init();
-  console.log(cirles.length);
 });
 
-class Circle {
-  constructor(x, y, dx, dy, radius) {
+// Objects
+class Object {
+  constructor(x, y, radius, color) {
     this.x = x;
     this.y = y;
-    this.dx = dx;
-    this.dy = dy;
     this.radius = radius;
-    this.color = getRandomColor();
-    this.minRadius = radius;
+    this.color = color;
   }
+
   draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
-    c.stroke();
+    c.closePath();
   }
-  updatePos() {
-    if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
-      this.dx = -this.dx;
-    }
-    if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
-      this.dy = -this.dy;
-    }
-    this.x += this.dx;
-    this.y += this.dy;
 
-    //interactivity
-    if (
-      mouse.x - this.x < distance &&
-      mouse.x - this.x > -distance &&
-      mouse.y - this.y < distance &&
-      mouse.y - this.y > -distance
-    ) {
-      if (this.radius < maxRadius) {
-        this.radius += 3;
-      }
-    } else if (this.radius > this.minRadius) {
-      this.radius--;
-    }
+  update() {
+    this.draw();
   }
 }
 
-function getCircle() {
-  let radius = Math.random() * 20 + 1;
-  let x = Math.random() * (innerWidth - radius * 2) + radius;
-  let y = Math.random() * (innerHeight - radius * 2) + radius;
-  let dx = (Math.random() + 0.5) * 4;
-  let dy = (Math.random() + 0.5) * 4;
-  return new Circle(x, y, dx, dy, radius);
-}
-
-let cirles = [];
-const NCIRCS = 100;
-
-for (let i = 0; i < NCIRCS; i++) {
-  cirles.push(getCircle());
-}
-
+// Implementation
+let objects;
 function init() {
-  let cirles = [];
-  for (let i = 0; i < NCIRCS; i++) {
-    cirles.push(getCircle());
+  objects = [];
+
+  for (let i = 0; i < 400; i++) {
+    // objects.push()
   }
 }
 
-let frame = 0;
+// Animation Loop
 function animate() {
-  if (frame > 1000) {
-    return;
-  }
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  c.clearRect(0, 0, canvas.width, canvas.height);
 
-  for (let i = 0; i < cirles.length; i++) {
-    cirles[i].draw();
-    cirles[i].updatePos();
-  }
-
-  frame++;
+  c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
+  // objects.forEach(object => {
+  //  object.update()
+  // })
 }
 
+init();
 animate();
