@@ -66,6 +66,13 @@ window.addEventListener("mousemove", function (event) {
   mouse.y = event.y;
 });
 
+window.addEventListener("resize", function (event) {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  init();
+  console.log(cirles.length);
+});
+
 class Circle {
   constructor(x, y, dx, dy, radius) {
     this.x = x;
@@ -100,7 +107,7 @@ class Circle {
       mouse.y - this.y > -distance
     ) {
       if (this.radius < maxRadius) {
-        this.radius += 2;
+        this.radius += 3;
       }
     } else if (this.radius > this.minRadius) {
       this.radius--;
@@ -118,15 +125,22 @@ function getCircle() {
 }
 
 let cirles = [];
-const NCIRCS = 50;
+const NCIRCS = 200;
 
 for (let i = 0; i < NCIRCS; i++) {
   cirles.push(getCircle());
 }
 
+function init() {
+  let cirles = [];
+  for (let i = 0; i < NCIRCS; i++) {
+    cirles.push(getCircle());
+  }
+}
+
 let frame = 0;
 function animate() {
-  if (frame > 500) {
+  if (frame > 1000) {
     return;
   }
   requestAnimationFrame(animate);
