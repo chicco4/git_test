@@ -80,7 +80,7 @@ function getCircle() {
 }
 
 let cirles = [];
-const NCIRCS = 30;
+const NCIRCS = 10;
 
 for (let i = 0; i < NCIRCS; i++) {
   cirles.push(getCircle());
