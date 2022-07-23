@@ -45,12 +45,44 @@ c.arc(300, 300, 50, 22, 90, true);
 c.stroke();
 */
 
-let x = Math.random() * (innerWidth - 100);
-let y = Math.random() * (innerHeight - 100);
-let dx = (Math.random() + 0.5) * 4;
-let dy = (Math.random() + 0.5) * 4;
-let radius = 50;
-c.strokeStyle = "black";
+class Circle {
+  constructor(x, y, dx, dy, radius) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+  }
+  draw() {
+    c.beginPath();
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    c.stroke();
+  }
+  updatePos() {
+    if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+      this.dx = -this.dx;
+    }
+    if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
+      this.dy = -this.dy;
+    }
+    this.x += this.dx;
+    this.y += this.dy;
+  }
+}
+
+function getCircle() {
+  let x = Math.random() * (innerWidth - 100);
+  let y = Math.random() * (innerHeight - 100);
+  let dx = (Math.random() + 0.5) * 4;
+  let dy = (Math.random() + 0.5) * 4;
+  let radius = 50;
+  return new Circle(x, y, dx, dy, radius);
+}
+
+let cirles = [];
+for (let i = 0; i < 3; i++) {
+  cirles.push(getCircle());
+}
 
 let frame = 0;
 function animate() {
@@ -60,17 +92,10 @@ function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-  c.beginPath();
-  c.arc(x, y, radius, 0, Math.PI * 2, false);
-  c.stroke();
-  if (x + radius > innerWidth || x - radius < 0) {
-    dx = -dx;
+  for (let i = 0; i < 3; i++) {
+    cirles[i].draw();
+    cirles[i].updatePos();
   }
-  if (y + radius > innerHeight || y - radius < 0) {
-    dy = -dy;
-  }
-  x += dx;
-  y += dy;
 
   frame++;
 }
