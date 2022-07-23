@@ -45,13 +45,18 @@ c.arc(300, 300, 50, 22, 90, true);
 c.stroke();
 */
 
-let x = Math.random() * innerWidth;
-let y = Math.random() * innerHeight;
-let dx = (Math.random() + 0.5) * 7;
-let dy = (Math.random() + 0.5) * 7;
+let x = Math.random() * (innerWidth - 100);
+let y = Math.random() * (innerHeight - 100);
+let dx = (Math.random() + 0.5) * 4;
+let dy = (Math.random() + 0.5) * 4;
 let radius = 50;
 c.strokeStyle = "black";
+
+let frame = 0;
 function animate() {
+  if (frame > 300) {
+    return;
+  }
   requestAnimationFrame(animate);
   c.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -66,6 +71,9 @@ function animate() {
   }
   x += dx;
   y += dy;
+
+  console.log(frame);
+  frame++;
 }
 
 animate();
