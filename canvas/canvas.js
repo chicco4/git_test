@@ -44,6 +44,27 @@ c.beginPath();
 c.arc(300, 300, 50, 22, 90, true);
 c.stroke();
 */
+let mouse = {
+  x: undefined,
+  y: undefined,
+};
+
+let maxRadius = 100;
+let distance = 50;
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+window.addEventListener("mousemove", function (event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+});
 
 class Circle {
   constructor(x, y, dx, dy, radius) {
@@ -52,11 +73,14 @@ class Circle {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.color = getRandomColor();
+    this.minRadius = radius;
   }
   draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.stroke();
+    c.fillStyle = this.color;
+    c.fill();
   }
   updatePos() {
     if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
@@ -67,11 +91,25 @@ class Circle {
     }
     this.x += this.dx;
     this.y += this.dy;
+
+    //interactivity
+    if (
+      mouse.x - this.x < distance &&
+      mouse.x - this.x > -distance &&
+      mouse.y - this.y < distance &&
+      mouse.y - this.y > -distance
+    ) {
+      if (this.radius < maxRadius) {
+        this.radius += 2;
+      }
+    } else if (this.radius > this.minRadius) {
+      this.radius--;
+    }
   }
 }
 
 function getCircle() {
-  let radius = 50;
+  let radius = Math.random() * 20 + 1;
   let x = Math.random() * (innerWidth - radius * 2) + radius;
   let y = Math.random() * (innerHeight - radius * 2) + radius;
   let dx = (Math.random() + 0.5) * 4;
@@ -80,7 +118,7 @@ function getCircle() {
 }
 
 let cirles = [];
-const NCIRCS = 10;
+const NCIRCS = 50;
 
 for (let i = 0; i < NCIRCS; i++) {
   cirles.push(getCircle());
