@@ -71,28 +71,30 @@ class Circle {
 }
 
 function getCircle() {
-  let x = Math.random() * (innerWidth - 100);
-  let y = Math.random() * (innerHeight - 100);
+  let radius = 50;
+  let x = Math.random() * (innerWidth - radius * 2) + radius;
+  let y = Math.random() * (innerHeight - radius * 2) + radius;
   let dx = (Math.random() + 0.5) * 4;
   let dy = (Math.random() + 0.5) * 4;
-  let radius = 50;
   return new Circle(x, y, dx, dy, radius);
 }
 
 let cirles = [];
-for (let i = 0; i < 3; i++) {
+const NCIRCS = 30;
+
+for (let i = 0; i < NCIRCS; i++) {
   cirles.push(getCircle());
 }
 
 let frame = 0;
 function animate() {
-  if (frame > 300) {
+  if (frame > 500) {
     return;
   }
   requestAnimationFrame(animate);
   c.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < cirles.length; i++) {
     cirles[i].draw();
     cirles[i].updatePos();
   }
