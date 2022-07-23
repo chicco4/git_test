@@ -72,7 +72,6 @@ function animate() {
   x += dx;
   y += dy;
 
-  console.log(frame);
   frame++;
 }
 
