@@ -102,7 +102,7 @@ const mouse = {
   y: innerHeight / 2,
 };
 
-const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
+const colors = ["#2185C5", "#7ECEFD", "#FF7F66"];
 
 // Event Listeners
 addEventListener("mousemove", (event) => {
@@ -123,18 +123,23 @@ class Particle {
     this.x = x;
     this.y = y;
     this.velocity = {
-      x: Math.random() - 0.5,
-      y: Math.random() - 0.5,
+      x: (Math.random() - 0.5) * 3,
+      y: (Math.random() - 0.5) * 3,
     };
     this.radius = radius;
-    this.color = color;
+    this.color = randomColor(colors);
     this.mass = 1;
   }
 
   draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.strokeStyle = this.color;
+    c.save();
+    c.globalAlpha = 0.8;
+    c.fillStyle = this.color;
+    c.fill();
+    c.restore();
+    c.strokeStyle = "black";
     c.stroke();
     c.closePath();
   }
@@ -161,6 +166,9 @@ class Particle {
     if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
       this.velocity.y = -this.velocity.y;
     }
+
+    //mouse collision detect
+
     this.x += this.velocity.x;
     this.y += this.velocity.y;
   }
