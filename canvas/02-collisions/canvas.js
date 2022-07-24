@@ -1,3 +1,5 @@
+/* UTILITY FUNCTIONS */
+
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -13,6 +15,14 @@ function distance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
 
+function getDistance(x1, y1, x2, y2) {
+  let xDist = x2 - x1;
+  let yDist = y2 - y1;
+  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+}
+
+/* MAIN STUFF */
+
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
@@ -20,8 +30,8 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2,
+  x: 10,
+  y: 10,
 };
 
 const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
@@ -40,7 +50,7 @@ addEventListener("resize", () => {
 });
 
 // Objects
-class Object {
+class Circle {
   constructor(x, y, radius, color) {
     this.x = x;
     this.y = y;
@@ -53,6 +63,7 @@ class Object {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
+    c.stroke();
     c.closePath();
   }
 
@@ -62,13 +73,11 @@ class Object {
 }
 
 // Implementation
-let objects;
+let circle1;
+let circle2;
 function init() {
-  objects = [];
-
-  for (let i = 0; i < 400; i++) {
-    // objects.push()
-  }
+  circle1 = new Circle(200, 300, 100, "grey");
+  circle2 = new Circle(undefined, undefined, 30, "red");
 }
 
 // Animation Loop
@@ -76,10 +85,18 @@ function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
-  c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
-  // objects.forEach(object => {
-  //  object.update()
-  // })
+  circle1.update();
+  circle2.x = mouse.x;
+  circle2.y = mouse.y;
+  circle2.update();
+  console.log(getDistance(circle1.x, circle1.y, circle2.x, circle2.y));
+
+  if (
+    getDistance(circle1.x, circle1.y, circle2.x, circle2.y) <
+    (circle1.radius + circle2.radius)
+  ) {
+    console.log("IMPACT")
+  }
 }
 
 init();
