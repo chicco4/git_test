@@ -93,9 +93,12 @@ function animate() {
 
   if (
     getDistance(circle1.x, circle1.y, circle2.x, circle2.y) <
-    (circle1.radius + circle2.radius)
+    circle1.radius + circle2.radius
   ) {
-    console.log("IMPACT")
+    console.log("IMPACT");
+    circle1.color = "red";
+  }else{
+    circle1.color = "grey";
   }
 }
 
