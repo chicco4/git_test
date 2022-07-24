@@ -94,7 +94,7 @@ function init() {
         if (distance(x, y, particles[j].x, particles[j].y) - radius * 2 < 0) {
           x = randomIntFromRange(0 + radius, canvas.width - radius);
           y = randomIntFromRange(0 + radius, canvas.height - radius);
-          //console.log("test new particle:" + " x:" + x + " y:" + y);
+          console.log("test new particle:" + " x:" + x + " y:" + y);
           j = -1;
         }
       }
