@@ -128,6 +128,7 @@ class Particle {
     };
     this.radius = radius;
     this.color = color;
+    this.mass = 1;
   }
 
   draw() {
@@ -148,8 +149,9 @@ class Particle {
           this.radius * 2 <
         0
       ) {
-        this.velocity.x = -this.velocity.x;
-        this.velocity.y = -this.velocity.y;
+        /*this.velocity.x = -this.velocity.x;
+        this.velocity.y = -this.velocity.y;*/
+        resolveCollision(this, particles[i]);
       }
     }
 
