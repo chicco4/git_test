@@ -15,12 +15,6 @@ function distance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
 
-function getDistance(x1, y1, x2, y2) {
-  let xDist = x2 - x1;
-  let yDist = y2 - y1;
-  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
-
 /* MAIN STUFF */
 
 const canvas = document.querySelector("canvas");
@@ -89,10 +83,10 @@ function animate() {
   circle2.x = mouse.x;
   circle2.y = mouse.y;
   circle2.update();
-  console.log(getDistance(circle1.x, circle1.y, circle2.x, circle2.y));
+  console.log(distance(circle1.x, circle1.y, circle2.x, circle2.y));
 
   if (
-    getDistance(circle1.x, circle1.y, circle2.x, circle2.y) <
+    distance(circle1.x, circle1.y, circle2.x, circle2.y) <
     circle1.radius + circle2.radius
   ) {
     console.log("IMPACT");
