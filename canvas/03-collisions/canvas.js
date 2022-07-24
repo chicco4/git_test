@@ -129,17 +129,18 @@ class Particle {
     this.radius = radius;
     this.color = randomColor(colors);
     this.mass = 1;
+    this.opacity = 0;
   }
 
   draw() {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.save();
-    c.globalAlpha = 0.8;
+    c.globalAlpha = this.opacity;
     c.fillStyle = this.color;
     c.fill();
     c.restore();
-    c.strokeStyle = "black";
+    c.strokeStyle = this.color;
     c.stroke();
     c.closePath();
   }
@@ -168,6 +169,15 @@ class Particle {
     }
 
     //mouse collision detect
+    if (
+      distance(mouse.x, mouse.y, this.x, this.y) < this.radius * 3 &&
+      this.opacity < 0.2
+    ) {
+      this.opacity += 0.05;
+    } else if (this.opacity > 0) {
+      this.opacity -= 0.02;
+      this.opacity = Math.max(0, this.opacity);
+    }
 
     this.x += this.velocity.x;
     this.y += this.velocity.y;
