@@ -27,7 +27,7 @@ const mouse = {
   y: innerHeight / 2,
 };
 
-const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
+const colors = ["#f72585", "#7209b7", "#3a0ca3", "#4361ee", "#4cc9f0"];
 
 // Event Listeners
 addEventListener("mousemove", (event) => {
@@ -53,24 +53,32 @@ class Particle {
     this.color = color;
     this.radians = Math.random() * Math.PI * 2;
     this.velocity = 0.05;
-    this.distFromCenter = randomIntFromRange(70, 120);
+    this.distFromCenter = randomIntFromRange(70, 150);
+    this.lastPoint;
   }
 
   draw() {
     c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.fillStyle = this.color;
-    c.fill();
+    c.strokeStyle = this.color;
+    c.lineWidth = this.radius;
+    c.moveTo(this.lastPoint.x, this.lastPoint.y);
+    c.lineTo(this.x, this.y);
+    c.stroke();
     c.closePath();
   }
 
   update() {
+    this.lastPoint = {
+      x: this.x,
+      y: this.y,
+    };
     //move points over time
     this.radians += this.velocity;
 
     //circ motion
     this.x = this.ox + Math.cos(this.radians) * this.distFromCenter;
     this.y = this.oy + Math.sin(this.radians) * this.distFromCenter;
+    
     this.draw();
   }
 }
@@ -80,9 +88,11 @@ let particles;
 function init() {
   particles = [];
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
+    let radius = Math.random() * 2 + 1;
+    let color = randomColor(colors);
     particles.push(
-      new Particle(canvas.width / 2, canvas.height / 2, 5, "blue")
+      new Particle(canvas.width / 2, canvas.height / 2, radius, color)
     );
   }
 }
