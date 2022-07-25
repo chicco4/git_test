@@ -81,7 +81,10 @@ function animate() {
 
   c.beginPath();
   c.moveTo(0, canvas.height / 2);
-  c.lineTo(canvas.width, canvas.height / 2);
+
+  for (let i = 0; i < canvas.width; i++) {
+    c.lineTo(i, canvas.height / 2 + Math.sin(i * 0.01)*200);
+  }
   c.strokeStyle = "black";
   c.stroke();
 
