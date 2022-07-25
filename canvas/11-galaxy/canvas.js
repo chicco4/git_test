@@ -69,6 +69,7 @@ function init() {
   }
 }
 
+const v = 0.003;
 // Animation Loop
 let radians = 0;
 let alpha = 1;
@@ -85,12 +86,15 @@ function animate() {
   });
   c.restore();
 
-  radians += 0.003;
+  radians += 0.001;
 
   if (mouseDown && alpha >= 0.03) {
     alpha -= 0.01;
   } else if (!mouseDown && alpha < 1) {
     alpha += 0.01;
+  }
+  if (mouseDown) {
+    radians += v;
   }
 }
 
