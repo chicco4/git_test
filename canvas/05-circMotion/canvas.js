@@ -55,6 +55,10 @@ class Particle {
     this.velocity = 0.05;
     this.distFromCenter = randomIntFromRange(70, 150);
     this.lastPoint;
+    this.lastMouse = {
+      x: this.ox,
+      y: this.oy,
+    };
   }
 
   draw() {
@@ -75,9 +79,13 @@ class Particle {
     //move points over time
     this.radians += this.velocity;
 
+    //mouse drag
+    this.lastMouse.x += (mouse.x - this.lastMouse.x) * 0.05;
+    this.lastMouse.y += (mouse.y - this.lastMouse.y) * 0.05;
+
     //circ motion
-    this.x = mouse.x + Math.cos(this.radians) * this.distFromCenter;
-    this.y = mouse.y + Math.sin(this.radians) * this.distFromCenter;
+    this.x = this.lastMouse.x + Math.cos(this.radians) * this.distFromCenter;
+    this.y = this.lastMouse.y + Math.sin(this.radians) * this.distFromCenter;
 
     this.draw();
   }
