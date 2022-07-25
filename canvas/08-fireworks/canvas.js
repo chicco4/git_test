@@ -103,6 +103,7 @@ addEventListener("click", (event) => {
 
   const particleCount = 400;
   const angleIncrement = (Math.PI * 2) / particleCount;
+  const power = 8;
 
   for (let i = 0; i < 400; i++) {
     particles.push(
@@ -112,8 +113,8 @@ addEventListener("click", (event) => {
         3,
         `hsl(${Math.random() * 360}, 50%,50%)`,
         {
-          x: Math.cos(angleIncrement * i) * Math.random() * 8,
-          y: Math.sin(angleIncrement * i) * Math.random() * 8,
+          x: Math.cos(angleIncrement * i) * Math.random() * power,
+          y: Math.sin(angleIncrement * i) * Math.random() * power,
         }
       )
     );
