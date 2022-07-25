@@ -79,7 +79,22 @@ function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
-  c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
+  c.fillStyle = "red";
+  c.fillRect(mouse.x, mouse.y, 100, 100);
+
+  c.fillStyle = "blue";
+  c.fillRect(canvas.width / 2, canvas.height / 2, 100, 100);
+
+  //collision detection
+  if (
+    mouse.x + 100 > canvas.width / 2 &&
+    mouse.x < canvas.width / 2 + 100 &&
+    mouse.y + 100 > canvas.height / 2 &&
+    mouse.y < canvas.height / 2 + 100
+  ) {
+    console.log("collision");
+  }
+
   // objects.forEach(object => {
   //  object.update()
   // })
