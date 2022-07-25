@@ -76,9 +76,9 @@ class Particle {
     this.radians += this.velocity;
 
     //circ motion
-    this.x = this.ox + Math.cos(this.radians) * this.distFromCenter;
-    this.y = this.oy + Math.sin(this.radians) * this.distFromCenter;
-    
+    this.x = mouse.x + Math.cos(this.radians) * this.distFromCenter;
+    this.y = mouse.y + Math.sin(this.radians) * this.distFromCenter;
+
     this.draw();
   }
 }
