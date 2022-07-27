@@ -1,6 +1,7 @@
 ## p5.js sketchs
 
-#### links:
+#### links to check:
 
-- https://p5js.org/download/
 - https://natureofcode.com/book
+- https://p5js.org/download/
+- https://p5js.org/get-started/
