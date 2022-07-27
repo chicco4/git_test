@@ -1,5 +1,6 @@
-# p5.js, code of nature
+p5.js sketch made reading the nature of code book
 
-[libraries](https://p5js.org/download/)
+## links
 
-[nature of code](https://natureofcode.com/book)
+- https://p5js.org/download/
+- https://natureofcode.com/book
